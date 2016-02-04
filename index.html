@@ -27,25 +27,33 @@
 	<script src="lib/angular/angular-messages.js"></script>
 	<script>
 		angular.module("listaTelefonica", ["ngMessages"]);
-		angular.module("listaTelefonica").controller("listaTelefonicaCtrl", function ($scope) {
+		angular.module("listaTelefonica").controller("listaTelefonicaCtrl", function ($scope, $http) {
 			$scope.app = "Lista Telefonica"
-			$scope.contatos = [
-				{nome: "Heraclito" , telefone: "9 96226505", data: new Date(), cor: "blue"},
-				{nome: "Thamillys" , telefone: "9 99944444", data: new Date(), cor: "yellow"},
-				{nome: "Maria" , telefone: "9 88883333", data: new Date(), cor: "green"}
-			];
-			$scope.operadoras = [
-				{nome: "Oi", codigo: 14, categoria:"celular", preco: 2},
-				{nome: "Vivo", codigo: 15, categoria:"celular", preco: 1},
-				{nome: "Tim", codigo: 41, categoria:"celular", preco: 3},
-				{nome: "GVT", codigo: 25, categoria:"Fixo", preco: 1},
-				{nome: "Embratel", codigo: 21, categoria:"Fixo", preco: 2}
-			];
-			$scope.adicionarContato = function (contato) {
-				$scope.contatos.push(angular.copy(contato));
-				delete $scope.contato;
-				$scope.contatoForm.$setPristine();
+			$scope.contatos = [];
+			$scope.operadoras = [];
+
+			var carregarContatos = function () {
+				$http.get("http://localhost:3412/contatos").success(function (data) {
+					$scope.contatos = data;
+				});
 			};
+
+			var carregarOperadoras = function () {
+				$http.get("http://localhost:3412/operadoras").success(function (data) {
+					$scope.operadoras = data;
+				});
+			};
+
+
+			$scope.adicionarContato = function (contato) {
+				contato.data = new Date();
+				$http.post("http://localhost:3412/contatos", contato).success(function (data) {
+					delete $scope.contato;
+					$scope.contatoForm.$setPristine();
+					carregarContatos();
+				});
+			};
+			
 			$scope.apagarContatos = function (contatos) {
 				$scope.contatos = contatos.filter(function (contato) {
 					if (!contato.selecionado) return contato;
@@ -58,8 +66,11 @@
 			};
 			$scope.ordenarPor = function (campo) {
 				$scope.criterioDeOrdenacao = campo;
-				$scope.direcaoDaOrdenacao = $scope.direcaoDaOrdenacao;
-			};		 
+				$scope.direcaoDaOrdenacao = !$scope.direcaoDaOrdenacao;
+			};	
+
+			carregarOperadoras();
+			carregarContatos();	 
 		});
 	</script>
 </head>
