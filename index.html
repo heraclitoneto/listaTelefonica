@@ -53,7 +53,7 @@
 					carregarContatos();
 				});
 			};
-			
+
 			$scope.apagarContatos = function (contatos) {
 				$scope.contatos = contatos.filter(function (contato) {
 					if (!contato.selecionado) return contato;
@@ -126,4 +126,6 @@
 	<div ng-include="'footer.html'"></div>
 	
 </body>
+
 </html>
+
