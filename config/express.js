@@ -25,6 +25,4 @@ app.get('/operadoras', function (req, res) {
 
 });
 
-
-
 module.exports = app;
