@@ -27,8 +27,5 @@ app.get('/operadoras', function (req, res) {
 
 });
 
-app.post('/contatos', function (req, res) {
-	res.json(contatos);
-});
 
 module.exports = app;
