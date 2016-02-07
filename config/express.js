@@ -1,6 +1,8 @@
 var express = require('express');
 var app = express();
 
+app.use(express.static("./public"));
+
 
 var contatos = [
 	{nome: "Heráclito", telefone: "9999-2222", data: new Date(), operadora: {nome: "Oi", codigo: 14}},
@@ -23,6 +25,10 @@ app.get('/contatos', function (req, res) {
 app.get('/operadoras', function (req, res) {
 	res.json(operadoras);
 
+});
+
+app.post('/contatos', function (req, res) {
+	res.json(contatos);
 });
 
 module.exports = app;

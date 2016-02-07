@@ -2,7 +2,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Lista Telefonica</title>
-	<link rel="stylesheet" type="text/css" href="../lib/bootstrap/bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="lib/bootstrap/bootstrap.css">
 	<style>
 		.jumbotron {
 			width: 600px;
@@ -22,9 +22,9 @@
 		background-color: yellow;
 	}
 	</style>
-	<script src="../lib/angular/angular.js"></script>
-	<script src="../lib/angular/angular-locale_pt-br.js"></script>
-	<script src="../lib/angular/angular-messages.js"></script>
+	<script src="lib/angular/angular.js"></script>
+	<script src="lib/angular/angular-locale_pt-br.js"></script>
+	<script src="lib/angular/angular-messages.js"></script>
 	<script>
 		angular.module("listaTelefonica", ["ngMessages"]);
 		angular.module("listaTelefonica").controller("listaTelefonicaCtrl", function ($scope, $http) {
@@ -123,7 +123,7 @@
 		<button class="btn btn-primary btn-block" ng-click="adicionarContato(contato)" ng-disabled="contatoForm.$invalid">Adiconar Contato</button>
 		<button class="btn btn-danger btn-block" ng-click="apagarContatos(contatos)" ng-disabled="!isContatoSelecionado(contatos)"> Apagar Contato </button>
 	</div> 
-	<div ng-include="'../footer.html'"></div>
+	<div ng-include="'footer.html'"></div>
 	
 </body>
 
